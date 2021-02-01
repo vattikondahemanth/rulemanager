@@ -1,8 +1,8 @@
 uvicorn==0.13.3
 gunicorn==20.0.4
 fastapi==0.63.0
-pydantic==1.7.3
-passlib==1.7
+pydantic[email]==1.7.3
+passlib[bcrypt]==1.7
 pyjwt==1.7
 alembic==1.5.3
 python-slugify==3.0
@@ -10,4 +10,3 @@ Unidecode==1.1.2
 python-dotenv==0.10.1
 databases==0.4.1
 motor==2.3.0
-bcrypt==3.2.0
