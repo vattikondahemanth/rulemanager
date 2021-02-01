@@ -9,7 +9,6 @@ from starlette.status import (
 )
 
 from .article import get_article_by_slug
-from .employee import get_employee_by_slug
 from .user import get_user, get_user_by_email
 from ..db.mongodb import AsyncIOMotorClient
 from ..models.article import ArticleInDB
@@ -61,15 +60,3 @@ async def check_article_for_existence_and_modifying_permissions(
             status_code=HTTP_403_FORBIDDEN,
             detail="You have no permission for modifying this article",
         )
-
-
-async def get_employee_or_404(
-        conn: AsyncIOMotorClient
-) -> EmployeeInDB:
-    searched_employee = await get_employee_by_slug(conn)
-    if not searched_employee:
-        raise HTTPException(
-            status_code=HTTP_404_NOT_FOUND,
-            detail=f"Employee not found",
-        )
-    return searched_employee

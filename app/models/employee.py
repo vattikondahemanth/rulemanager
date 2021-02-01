@@ -1,27 +1,31 @@
 from typing import List
+from .pydanticmodels import PydanticObjectId
 
-from .dbmodel import DBModelMixin
+from .dbmodel import DBModelMixin, DateTimeModelMixin
 from .profile import Profile
 from .rwmodel import RWModel
 
 
-class EmployeeInDB(RWModel):
-	_id: str
-	name: str
-	department: str
+class EmployeeInDB(DateTimeModelMixin):
+	object_id: PydanticObjectId = None
+	id: int = None
+	name: str = None
+	department: str = None
 
 
-class Employee(EmployeeInDB):
+class Employee(DateTimeModelMixin):
+	id: int = None
+	name: str = None
+	department: str = None
+    
+
+class EmployeeInCreate(Employee):
     pass
 
 
-class EmployeeInCreate(RWModel):
-    body: str
-
-
 class EmployeeInResponse(RWModel):
-    employee: Employee
+    employee: EmployeeInDB
 
 
 class ManyEmployeesInResponse(RWModel):
-    employees: List[Employee]
+    employees: List[EmployeeInDB]

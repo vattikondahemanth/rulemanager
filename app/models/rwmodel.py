@@ -2,6 +2,9 @@ from datetime import datetime, timezone
 
 from pydantic import BaseConfig, BaseModel
 
+from .pydanticmodels import PydanticObjectId
+from bson.objectid import ObjectId
+
 
 class RWModel(BaseModel):
     class Config(BaseConfig):
@@ -9,5 +12,6 @@ class RWModel(BaseModel):
         json_encoders = {
             datetime: lambda dt: dt.replace(tzinfo=timezone.utc)
             .isoformat()
-            .replace("+00:00", "Z")
+            .replace("+00:00", "Z"),
+			ObjectId: lambda obj: str(obj)       
         }
